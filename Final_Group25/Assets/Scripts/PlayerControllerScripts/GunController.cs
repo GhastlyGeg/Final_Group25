@@ -32,6 +32,11 @@ public class GunControlling : MonoBehaviour
 	//Weapon Recoil
 	public bool randomizedRecoil;
 	public Vector2 randomRecoilConstraints;
+
+	//Shooting
+	public Transform bulletSpawnPoint;
+	public GameObject bulletPrefab;
+	public float bulletSpeed = 10;
 	
 	//You only need to assign this if randomized recoil is off
 	public Vector2 recoilPatterns;
@@ -108,7 +113,8 @@ public class GunControlling : MonoBehaviour
 		yield return new WaitForSeconds(fireRate);
 		canShoot = true;
 
-		RayCastForEnemy();
+		var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+		bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
 	}
 
 	IEnumerator MuzzleFlash()
