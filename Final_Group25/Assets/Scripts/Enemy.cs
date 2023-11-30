@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI; 
 
+/*
 public class Enemy : MonoBehaviour
 { 
     int enemySpeed;
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
     bool alreadyAttacked;
 
     //States
-    public float sightRange, AttackRange;
+    public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
     private void Awake()
@@ -78,6 +79,8 @@ public class Enemy : MonoBehaviour
     }
     private void ChasePlayer()
     {
+        Vector3 chasePlayer = 
+
         agent.SetDestination(player.position);
     }
     private void AttackPlayer()
@@ -110,3 +113,4 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject); 
     }
 }
+*/
