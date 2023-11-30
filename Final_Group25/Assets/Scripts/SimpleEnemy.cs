@@ -9,12 +9,38 @@ public class SimpleEnemy : MonoBehaviour
     public float speed;
 
     public float health;
-/*
+    
     //Attacking
-    public float timeBetweenAttacks;
-    bool alreadyAttacked;
-    public float attackRange;
-*/
+
+     public float timeBetweenAttacks;
+
+     bool alreadyAttacked;
+
+     public float attackRange;
+
+
+
+    /*
+    private void AttackPlayer()
+    {
+
+     transform.LookAt(player);
+
+     if (!alreadyAttacked)
+        {
+          alreadyAttacked = true;
+          Invoke(nameof(ResetAttack), timeBetweenAttacks); 
+         }
+
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false; 
+    }
+
+    */
+
+    
 
 
     // Start is called before the first frame update
