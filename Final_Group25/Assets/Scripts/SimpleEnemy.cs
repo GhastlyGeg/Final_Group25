@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//12/5/2023
+//Enemy movement and attacking
+
 public class SimpleEnemy : MonoBehaviour
 {
 
@@ -21,21 +24,15 @@ public class SimpleEnemy : MonoBehaviour
 
 
 
-    /*
+  
     private void AttackPlayer()
     {
     
-     transform.LookAt(player);
-
-     if (!alreadyAttacked)
-        {
-          alreadyAttacked = true;
-          Invoke(nameof(ResetAttack), timeBetweenAttacks); 
-         }
+    
 
    
+   }
 
-*/
     private void ResetAttack()
      {
         
@@ -63,8 +60,9 @@ public class SimpleEnemy : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-       
+        /*
+        transform.LookAt(Vector3.gameObject.tag == "Player");
+        */
     }
 
     private void TakeDamage(int damage)
