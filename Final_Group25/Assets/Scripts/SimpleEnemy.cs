@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SimpleEnemy : MonoBehaviour
 {
@@ -12,11 +13,11 @@ public class SimpleEnemy : MonoBehaviour
     
     //Attacking
 
-     public float timeBetweenAttacks;
+     public float attackCooldown = 4f;
+    public float attackTimer; 
 
-     bool alreadyAttacked;
-
-     public float attackRange;
+     public float attackRange = 3f;
+    public float damage = 3f;
 
 
 
@@ -32,15 +33,22 @@ public class SimpleEnemy : MonoBehaviour
           Invoke(nameof(ResetAttack), timeBetweenAttacks); 
          }
 
-    */
+   
 
+*/
     private void ResetAttack()
      {
-       alreadyAttacked = false; 
+        
      }
+     
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
 
+        }
+    }
     
 
 
@@ -54,7 +62,9 @@ public class SimpleEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime); 
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+       
     }
 
     private void TakeDamage(int damage)
