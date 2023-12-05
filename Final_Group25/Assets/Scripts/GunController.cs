@@ -8,6 +8,7 @@ public class GunControl : MonoBehaviour
 	public float fireRate = 0.1f;
 	public int clipSize = 30;
 	public int reservedAmmoCapacity = 270;
+	public float knockback;
 
 	//Variables that change throughout code
 	public bool canShoot;
@@ -130,7 +131,7 @@ public class GunControl : MonoBehaviour
 				//Debug.Log("Hit an Enemy");
 				Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
 				rb.constraints = RigidbodyConstraints.None;
-				rb.AddForce(transform.parent.transform.forward * 500);
+				rb.AddForce(transform.parent.transform.forward * knockback);
 			}
 			catch
 			{
