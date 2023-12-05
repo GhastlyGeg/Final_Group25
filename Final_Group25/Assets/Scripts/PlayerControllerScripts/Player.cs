@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float jumpForce = 20f;
+
+    public float dashForce = 20f;
     
     private Rigidbody rigidBodyRef;
 
@@ -19,6 +21,15 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             HandleJump();
+        }
+
+        if(Input.GetKey(KeyCode.D))
+        {
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                rigidBodyRef.AddForce(Vector3.right * dashForce, ForceMode.Impulse);
+                //Debug.Log("Player dashed right");
+            }
         }
     }
 

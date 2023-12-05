@@ -10,6 +10,8 @@ public class GunControl : MonoBehaviour
 	public int reservedAmmoCapacity = 270;
 	public float knockback;
 
+	public GameObject Reticle;
+
 	//Variables that change throughout code
 	public bool canShoot;
 	int currentAmmoInClip;
@@ -86,7 +88,7 @@ public class GunControl : MonoBehaviour
 
 		Vector3 desiredPosition = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmoothing);
 
-		transform.localPosition = desiredPosition; 
+		transform.localPosition = desiredPosition;
 	}
 
 	void DetermineRecoil()
