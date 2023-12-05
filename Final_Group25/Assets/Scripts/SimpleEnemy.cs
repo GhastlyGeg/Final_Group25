@@ -23,7 +23,7 @@ public class SimpleEnemy : MonoBehaviour
     /*
     private void AttackPlayer()
     {
-
+    
      transform.LookAt(player);
 
      if (!alreadyAttacked)
@@ -32,13 +32,14 @@ public class SimpleEnemy : MonoBehaviour
           Invoke(nameof(ResetAttack), timeBetweenAttacks); 
          }
 
+    */
 
     private void ResetAttack()
-    {
-        alreadyAttacked = false; 
-    }
+     {
+       alreadyAttacked = false; 
+     }
 
-    */
+    
 
     
 
