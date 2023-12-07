@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,9 +17,12 @@ public class Player : MonoBehaviour
 
     private Rigidbody rigidBodyRef;
 
+    
+
     void Start()
     {
         rigidBodyRef = GetComponent<Rigidbody>();
+       
     }
 
     void Update()
@@ -55,6 +59,29 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "SpikePole")
+        {
+            playerHealth --;
+
+
+            Debug.Log("Player is spiked up rn");
+        }
+    }
+
+
+    private void Death()
+    {
+        //ego death
+        if (playerHealth <= 0)
+        {
+            SceneManager.LoadScene(2); 
+            Debug.Log("This fella dead");
+        }
+    }
+
 
     private void HandleJump()
     {
