@@ -65,7 +65,7 @@ public class SimpleEnemy : MonoBehaviour
         */
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
 

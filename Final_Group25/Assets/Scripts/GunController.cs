@@ -151,6 +151,12 @@ public class GunControl : MonoBehaviour
 		RaycastHit hit;
 		if(Physics.Raycast(transform.parent.position, transform.parent.forward, out hit, 1 << LayerMask.NameToLayer("Enemy")))
 		{
+
+			if (hit.collider.gameObject.tag == "Enemy")
+			{
+				hit.collider.GetComponent<SimpleEnemy>().TakeDamage(1);
+			}
+
 			try
 			{
 				//Debug.Log("Hit an Enemy");
@@ -164,4 +170,6 @@ public class GunControl : MonoBehaviour
 			}
 		}
 	}
+
+
 }
