@@ -3215,7 +3215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  health: 0
+  enemyHealth: 0
   attackCooldown: 4
   attackTimer: 0
   attackRange: 0
@@ -7009,7 +7009,7 @@ MonoBehaviour:
   recoilPatterns: {x: 0, y: 0}
   boopSpeed: 20
   boopSpawnPoint: {fileID: 1142476511}
-  boopPrefab: {fileID: 919132149155446097, guid: b759147fc330e484fbc9f7db4a181b2a, type: 3}
+  boopPrefab: {fileID: 3833527333362203758, guid: 17f98d038e20e074b9da8a13ccbfeba6, type: 3}
 --- !u!1 &1732805296
 GameObject:
   m_ObjectHideFlags: 0
