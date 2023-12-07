@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class StageHazards : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.tag == "SpikePole")
+        {
+            //playerHealth--; 
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }
