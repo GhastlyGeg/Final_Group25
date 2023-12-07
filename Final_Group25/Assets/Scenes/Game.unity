@@ -9197,6 +9197,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
+      propertyPath: playerHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
       propertyPath: leftDashForce
       value: -20
       objectReference: {fileID: 0}
