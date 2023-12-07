@@ -3215,7 +3215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  health: 0
+  enemyHealth: 0
   attackCooldown: 4
   attackTimer: 0
   attackRange: 0
@@ -9195,6 +9195,10 @@ PrefabInstance:
     - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
       propertyPath: dashForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
+      propertyPath: playerHealth
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
       propertyPath: leftDashForce
