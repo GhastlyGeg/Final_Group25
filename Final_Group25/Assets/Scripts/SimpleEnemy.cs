@@ -12,7 +12,9 @@ public class SimpleEnemy : MonoBehaviour
     private Transform target;
     public float speed;
 
-    public float health;
+
+
+    public float enemyHealth;
     
     //Attacking
 
@@ -26,12 +28,11 @@ public class SimpleEnemy : MonoBehaviour
 
   
     private void AttackPlayer()
-    {
-    
-    
-
+    { 
+       //playerHealth--;
+       //ResetAttack(); 
    
-   }
+    }
 
     private void ResetAttack()
      {
@@ -43,7 +44,7 @@ public class SimpleEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
+            AttackPlayer(); 
         }
     }
     
@@ -52,7 +53,7 @@ public class SimpleEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 3; 
+        enemyHealth = 3; 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
     }
 
@@ -67,9 +68,9 @@ public class SimpleEnemy : MonoBehaviour
 
     private void TakeDamage(int damage)
     {
-        health -= damage;
+        enemyHealth -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (enemyHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
 
     private void DestroyEnemy()
