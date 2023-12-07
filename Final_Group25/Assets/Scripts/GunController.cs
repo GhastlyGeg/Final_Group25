@@ -39,6 +39,13 @@ public class GunControl : MonoBehaviour
 	//You only need to assign this if randomized recoil is off
 	public Vector2 recoilPatterns;
 
+	//Boop
+	public float boopSpeed;
+	public Transform boopSpawnPoint;
+	public GameObject boopPrefab;
+
+
+
 	private void Start()
 	{
 		currentAmmoInClip = clipSize;
@@ -52,6 +59,11 @@ public class GunControl : MonoBehaviour
 
 		DetermineRotation();
 
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			StartCoroutine(Boop());
+		}
+		
 		if (Input.GetMouseButtonDown(0) && canShoot && currentAmmoInClip > 0)
 		{
 			canShoot = false;
@@ -123,7 +135,18 @@ public class GunControl : MonoBehaviour
 		muzzleFlashImage.color = new Color(0, 0, 0, 0);
 	}
 
-	void RayCastForEnemy()
+	IEnumerator Boop()
+	{
+		DetermineRecoil();
+		StartCoroutine(MuzzleFlash());
+		yield return new WaitForSeconds(0.05f);
+		canShoot = true;
+
+        var bullet = Instantiate(boopPrefab, boopSpawnPoint.position, boopSpawnPoint.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = boopSpawnPoint.forward * boopSpeed;
+    }
+
+    void RayCastForEnemy()
 	{
 		RaycastHit hit;
 		if(Physics.Raycast(transform.parent.position, transform.parent.forward, out hit, 1 << LayerMask.NameToLayer("Enemy")))
