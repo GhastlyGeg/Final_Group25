@@ -4427,7 +4427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1142476511}
   m_Layer: 0
-  m_Name: BulletSpawnPoint
+  m_Name: BoopSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7007,6 +7007,9 @@ MonoBehaviour:
   randomizedRecoil: 1
   randomRecoilConstraints: {x: 20, y: 20}
   recoilPatterns: {x: 0, y: 0}
+  boopSpeed: 20
+  boopSpawnPoint: {fileID: 1142476511}
+  boopPrefab: {fileID: 919132149155446097, guid: b759147fc330e484fbc9f7db4a181b2a, type: 3}
 --- !u!1 &1732805296
 GameObject:
   m_ObjectHideFlags: 0
