@@ -11,7 +11,9 @@ public class Player : MonoBehaviour
     public float leftDashForce = -20f;
 
     public float sprintSpeed = 20f;
-    
+
+    public int playerHealth = 5;
+
     private Rigidbody rigidBodyRef;
 
     void Start()

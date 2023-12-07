@@ -139,7 +139,7 @@ public class GunControl : MonoBehaviour
 	{
 		DetermineRecoil();
 		StartCoroutine(MuzzleFlash());
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(2f);
 		canShoot = true;
 
         var bullet = Instantiate(boopPrefab, boopSpawnPoint.position, boopSpawnPoint.rotation);
