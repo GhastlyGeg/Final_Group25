@@ -2072,8 +2072,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   health: 0
-  timeBetweenAttacks: 0
+  attackCooldown: 4
+  attackTimer: 0
   attackRange: 0
+  damage: 3
 --- !u!1001 &822654678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2476,6 +2478,32 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1674268716328342803, guid: db0213e77f35d554f8012e7296d4be1a, type: 3}
+--- !u!1 &979213437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: bcae914220acd4907840a029bb9d9aec, type: 3}
+  m_PrefabInstance: {fileID: 1949904707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &979213442
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979213437}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9999994, y: 1.549733, z: 1.999999}
+  m_Center: {x: -0.0000003390089, y: -0.7748745, z: 0.00000028445749}
 --- !u!1 &982660633 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 594e7118cbe22f34ea8a2500cd7b5e93, type: 3}
@@ -4428,6 +4456,7 @@ MonoBehaviour:
   clipSize: 6
   reservedAmmoCapacity: 1000
   knockback: 10000
+  Reticle: {fileID: 0}
   canShoot: 0
   muzzleFlashImage: {fileID: 2071850464}
   flashes:
@@ -5140,6 +5169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterProNighttime
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bcae914220acd4907840a029bb9d9aec, type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bcae914220acd4907840a029bb9d9aec, type: 3}
       propertyPath: m_LocalScale.x
       value: 360.08
@@ -5199,7 +5232,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: bcae914220acd4907840a029bb9d9aec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 979213442}
   m_SourcePrefab: {fileID: 100100000, guid: bcae914220acd4907840a029bb9d9aec, type: 3}
 --- !u!1001 &2002891330
 PrefabInstance:
@@ -5967,7 +6003,11 @@ PrefabInstance:
       objectReference: {fileID: 1142476511}
     - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
       propertyPath: dashForce
-      value: 0.05
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785473083953483452, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
+      propertyPath: leftDashForce
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 5523635174057715607, guid: aa9cc30b8f5afdf4fa3732ff227543ca, type: 3}
       propertyPath: m_LocalPosition.x

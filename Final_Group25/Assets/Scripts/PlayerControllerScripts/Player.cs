@@ -6,7 +6,11 @@ public class Player : MonoBehaviour
 {
     public float jumpForce = 20f;
 
-    public float dashForce = 20f;
+    public float rightDashForce = 20f;
+
+    public float leftDashForce = -20f;
+
+    public float sprintSpeed = 20f;
     
     private Rigidbody rigidBodyRef;
 
@@ -23,12 +27,29 @@ public class Player : MonoBehaviour
             HandleJump();
         }
 
-        if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            if(Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                rigidBodyRef.AddForce(Vector3.right * dashForce, ForceMode.Impulse);
+                rigidBodyRef.AddForce(transform.right * rightDashForce, ForceMode.Impulse);
                 //Debug.Log("Player dashed right");
+            }
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                rigidBodyRef.AddForce(transform.right * leftDashForce, ForceMode.Impulse);
+                //Debug.Log("Player dashed right");
+            }
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                rigidBodyRef.AddForce(transform.forward * sprintSpeed, ForceMode.Acceleration);
             }
         }
     }
