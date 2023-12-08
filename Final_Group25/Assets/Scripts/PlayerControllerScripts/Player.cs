@@ -69,8 +69,14 @@ public class Player : MonoBehaviour
 
             Debug.Log("Player is spiked up rn");
         }
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            playerHealth--;
+        }
     }
 
+ 
 
     private void Death()
     {
