@@ -12,21 +12,21 @@ public class SimpleEnemy : MonoBehaviour
     private Transform target;
     public float speed;
 
-
+    private bool onWater;
 
     public float enemyHealth;
-    
+
+    public Rigidbody rigidBodyRef;
+    public float jumpForce;
+
     //Attacking
 
-     public float attackCooldown = 4f;
+    public float attackCooldown = 4f;
     public float attackTimer; 
 
      public float attackRange = 3f;
     public float damage = 3f;
 
-
-
-  
     private void AttackPlayer()
     { 
        //playerHealth--;
@@ -46,6 +46,11 @@ public class SimpleEnemy : MonoBehaviour
         {
             AttackPlayer(); 
         }
+
+        if (other.gameObject.tag == "Water")
+        {
+            onWater = true;
+        }
     }
     
 
@@ -53,8 +58,9 @@ public class SimpleEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyHealth = 3; 
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        rigidBodyRef = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -64,6 +70,11 @@ public class SimpleEnemy : MonoBehaviour
         /*
         transform.LookAt(Vector3.gameObject.tag == "Player");
         */
+
+        if (onWater == true)
+        {
+            Bounce();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -76,5 +87,20 @@ public class SimpleEnemy : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    private void Bounce()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.3f))
+        {
+            Debug.Log("Player is touching the ground so jump");
+            rigidBodyRef.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        else
+        {
+            
+        }
     }
 }

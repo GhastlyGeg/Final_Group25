@@ -8,16 +8,21 @@ TagManager:
   - Enemy
   - Water
   - SpikePole
+  - Target
+  - BossDoor
+  - Health Boost
+  - Roof
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Terrain
+  - Target
   - Enemy
+  - Roof
   - 
   - 
   - 
@@ -39,8 +44,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PostProcessing
   m_SortingLayers:
   - name: Default
     uniqueID: 0

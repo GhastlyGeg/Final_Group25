@@ -51,12 +51,17 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 rigidBodyRef.AddForce(transform.forward * sprintSpeed, ForceMode.Acceleration);
             }
+        }
+
+        if (playerHealth == 0)
+        {
+            Death();
         }
     }
 
@@ -74,18 +79,24 @@ public class Player : MonoBehaviour
         {
             playerHealth--;
         }
+
+        if (other.gameObject.tag == "Health Boost")
+        {
+            playerHealth += 5;
+        }
+
+        if (other.gameObject.tag == "Water")
+        {
+            Death();
+        }
     }
 
  
 
     private void Death()
     {
-        //ego death
-        if (playerHealth <= 0)
-        {
-            SceneManager.LoadScene(2); 
-            Debug.Log("This fella dead");
-        }
+        SceneManager.LoadScene(2);
+        Debug.Log("This fella dead");
     }
 
 

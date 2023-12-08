@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GunControl : MonoBehaviour
+public class GunControlling : MonoBehaviour
 {
 	public float fireRate = 0.1f;
 	public int clipSize = 30;
 	public int reservedAmmoCapacity = 270;
-	public float knockback;
-
-	public GameObject Reticle;
 
 	//Variables that change throughout code
 	public bool canShoot;
@@ -35,16 +32,14 @@ public class GunControl : MonoBehaviour
 	//Weapon Recoil
 	public bool randomizedRecoil;
 	public Vector2 randomRecoilConstraints;
+
+	//Shooting
+	public Transform bulletSpawnPoint;
+	public GameObject bulletPrefab;
+	public float bulletSpeed = 10;
 	
 	//You only need to assign this if randomized recoil is off
 	public Vector2 recoilPatterns;
-
-	//Boop
-	public float boopSpeed;
-	public Transform boopSpawnPoint;
-	public GameObject boopPrefab;
-
-
 
 	private void Start()
 	{
@@ -59,12 +54,7 @@ public class GunControl : MonoBehaviour
 
 		DetermineRotation();
 
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			StartCoroutine(Boop());
-		}
-		
-		if (Input.GetMouseButtonDown(0) && canShoot && currentAmmoInClip > 0)
+		if (Input.GetMouseButton(0) && canShoot && currentAmmoInClip > 0)
 		{
 			canShoot = false;
 			currentAmmoInClip--;
@@ -100,7 +90,7 @@ public class GunControl : MonoBehaviour
 
 		Vector3 desiredPosition = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmoothing);
 
-		transform.localPosition = desiredPosition;
+		transform.localPosition = desiredPosition; 
 	}
 
 	void DetermineRecoil()
@@ -123,7 +113,8 @@ public class GunControl : MonoBehaviour
 		yield return new WaitForSeconds(fireRate);
 		canShoot = true;
 
-		RayCastForEnemy();
+		var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+		bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
 	}
 
 	IEnumerator MuzzleFlash()
@@ -134,42 +125,4 @@ public class GunControl : MonoBehaviour
 		muzzleFlashImage.sprite = null;
 		muzzleFlashImage.color = new Color(0, 0, 0, 0);
 	}
-
-	IEnumerator Boop()
-	{
-		DetermineRecoil();
-		StartCoroutine(MuzzleFlash());
-		yield return new WaitForSeconds(0.05f);
-		canShoot = true;
-
-        var bullet = Instantiate(boopPrefab, boopSpawnPoint.position, boopSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = boopSpawnPoint.forward * boopSpeed;
-    }
-
-    void RayCastForEnemy()
-	{
-		RaycastHit hit;
-		if(Physics.Raycast(transform.parent.position, transform.parent.forward, out hit, 1 << LayerMask.NameToLayer("Enemy")))
-		{
-
-			if (hit.collider.gameObject.tag == "Enemy")
-			{
-				hit.collider.GetComponent<SimpleEnemy>().TakeDamage(1);
-			}
-
-			try
-			{
-				//Debug.Log("Hit an Enemy");
-				Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
-				rb.constraints = RigidbodyConstraints.None;
-				rb.AddForce(transform.parent.transform.forward * knockback);
-			}
-			catch
-			{
-
-			}
-		}
-	}
-
-
 }

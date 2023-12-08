@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GunControlling : MonoBehaviour
+public class GunControl : MonoBehaviour
 {
 	public float fireRate = 0.1f;
 	public int clipSize = 30;
 	public int reservedAmmoCapacity = 270;
+	public float knockback;
+	public float sendToSun;
+
+	public GameObject Reticle;
 
 	//Variables that change throughout code
 	public bool canShoot;
-	int currentAmmoInClip;
+	public int currentAmmoInClip;
 	int ammoInReserve;
 
 	//Muzzle Flash
@@ -32,14 +36,16 @@ public class GunControlling : MonoBehaviour
 	//Weapon Recoil
 	public bool randomizedRecoil;
 	public Vector2 randomRecoilConstraints;
-
-	//Shooting
-	public Transform bulletSpawnPoint;
-	public GameObject bulletPrefab;
-	public float bulletSpeed = 10;
 	
 	//You only need to assign this if randomized recoil is off
 	public Vector2 recoilPatterns;
+
+	//Boop
+	public float boopSpeed;
+	public Transform boopSpawnPoint;
+	public GameObject boopPrefab;
+
+
 
 	private void Start()
 	{
@@ -54,7 +60,12 @@ public class GunControlling : MonoBehaviour
 
 		DetermineRotation();
 
-		if (Input.GetMouseButton(0) && canShoot && currentAmmoInClip > 0)
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			StartCoroutine(Boop());
+		}
+		
+		if (Input.GetMouseButtonDown(0) && canShoot && currentAmmoInClip > 0)
 		{
 			canShoot = false;
 			currentAmmoInClip--;
@@ -90,7 +101,7 @@ public class GunControlling : MonoBehaviour
 
 		Vector3 desiredPosition = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmoothing);
 
-		transform.localPosition = desiredPosition; 
+		transform.localPosition = desiredPosition;
 	}
 
 	void DetermineRecoil()
@@ -113,8 +124,7 @@ public class GunControlling : MonoBehaviour
 		yield return new WaitForSeconds(fireRate);
 		canShoot = true;
 
-		var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-		bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+		RayCastForEnemy();
 	}
 
 	IEnumerator MuzzleFlash()
@@ -126,17 +136,49 @@ public class GunControlling : MonoBehaviour
 		muzzleFlashImage.color = new Color(0, 0, 0, 0);
 	}
 
-	void RayCastForEnemy()
+	IEnumerator Boop()
+	{
+		DetermineRecoil();
+		StartCoroutine(MuzzleFlash());
+		yield return new WaitForSeconds(0.05f);
+		canShoot = true;
+
+        var bullet = Instantiate(boopPrefab, boopSpawnPoint.position, boopSpawnPoint.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = boopSpawnPoint.forward * boopSpeed;
+    }
+
+    void RayCastForEnemy()
 	{
 		RaycastHit hit;
 		if(Physics.Raycast(transform.parent.position, transform.parent.forward, out hit, 1 << LayerMask.NameToLayer("Enemy")))
 		{
+
+			if (hit.collider.gameObject.tag == "Enemy")
+			{
+				hit.collider.GetComponent<SimpleEnemy>().TakeDamage(1);
+			}
+
 			try
 			{
 				//Debug.Log("Hit an Enemy");
 				Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
 				rb.constraints = RigidbodyConstraints.None;
-				rb.AddForce(transform.parent.transform.forward * 500);
+				rb.AddForce(transform.parent.transform.forward * knockback);
+			}
+			catch
+			{
+
+			}
+		}
+
+		if (Physics.Raycast(transform.parent.position, transform.parent.forward, out hit, 1 << LayerMask.NameToLayer("Target")))
+		{
+
+			try
+			{
+				Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
+				rb.constraints = RigidbodyConstraints.None;
+				rb.AddForce(transform.parent.transform.forward * sendToSun);
 			}
 			catch
 			{
@@ -144,4 +186,6 @@ public class GunControlling : MonoBehaviour
 			}
 		}
 	}
+
+
 }
